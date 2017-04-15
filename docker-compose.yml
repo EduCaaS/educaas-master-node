@@ -19,7 +19,7 @@ services:
       - "8080:8080"
       - "9345:9345" 
     image: rancher/server:stable
-    command: --advertise-address ${MACHINE_IP} --db-host: mysql --db-port: 3306 --db-name: ${DB_NAME} --db-pass: ${DB_PASSWORD} --db-user: ${DB_USER}
+    command: --advertise-address ${MACHINE_IP} --db-host mysql --db-port 3306 --db-name ${DB_NAME} --db-pass ${DB_PASSWORD} --db-user ${DB_USER}
     env_file: .env
 
   lets-nginx:
