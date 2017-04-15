@@ -18,13 +18,13 @@ services:
       - "8080:8080"
       - "9345:9345" 
     image: rancher/server:stable
-    args:
-      db-host: mysql
-      db-port: 3306
-      db-user: ${DB_USER}
-      db-pass: ${DB_PASSWORD}
-      db-name: ${DB_NAME}
-      advertise-address: ${MACHINE_IP}
+    command: --advertise-address ${MACHINE_IP}
+    environment:
+      CATTLE_DB_CATTLE_MYSQL_HOST: mysql
+      CATTLE_DB_CATTLE_MYSQL_PORT: 3306
+      CATTLE_DB_CATTLE_USERNAME: ${DB_USER}
+      CATTLE_DB_CATTLE_PASSWORD: ${DB_PASSWORD}
+      CATTLE_DB_CATTLE_MYSQL_NAME: ${DB_NAME}
     env_file: .env
   lets-nginx:
     links:
