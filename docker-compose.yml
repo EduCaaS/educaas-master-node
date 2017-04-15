@@ -18,7 +18,7 @@ services:
     ports:
       - "8080:8080"
       - "9345:9345" 
-    image: rancher/server:stable
+    image: rancher/server:v1.4.1
     command: --advertise-address ${MACHINE_IP} --db-host mysql --db-port 3306 --db-name ${DB_NAME} --db-pass ${DB_PASSWORD} --db-user ${DB_USER}
     env_file: .env
     links: 
@@ -36,6 +36,8 @@ services:
       - 443:443
     image: smashwilson/lets-nginx
     env_file: .env
-
+    volumes:
+      - educaas_certs:/etc/letsencrypt/
 volumes:
   educaas_db:
+  educaas_certs:
