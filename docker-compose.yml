@@ -8,10 +8,24 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+    env_file: .env
     ports:
       - "3306:3306"
     volumes:
       - educaas_db:/var/lib/mysql
+
+  db-backup:
+    restart: unless-stopped
+    image: deitch/mysql-backup
+    links:
+      - mysql:db
+    enviroment:
+      - DB_DUMP_FREQ= ${DB_DUMP_FREQ}
+      - DB_DUMP_BEGIN= ${DB_DUMP_BEGIN}
+      - DB_DUMP_TARGET=/db
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    env_file: .env
 
   rancher:
     restart: unless-stopped
