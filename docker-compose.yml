@@ -19,7 +19,7 @@ services:
     image: deitch/mysql-backup
     links:
       - mysql:db
-    enviroment:
+    environment:
       - DB_DUMP_FREQ= ${DB_DUMP_FREQ}
       - DB_DUMP_BEGIN= ${DB_DUMP_BEGIN}
       - DB_DUMP_TARGET=/db
